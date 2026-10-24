@@ -53,6 +53,14 @@ student_crud_php/
 
 For an existing installation, import `upgrade_roles_instructors.sql` in phpMyAdmin. Fresh database imports from `db_4bsalibay.sql` already include the update. Seeded demo accounts use the password `password`; change these after signing in.
 
+## Vercel deployment notes
+
+This project includes a PHP community-runtime configuration for Vercel. Before it can serve real users, configure `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, and (when required by the provider) `DB_SSL` / `DB_SSL_CA` as Vercel environment variables. `config/db.php` keeps local XAMPP defaults for development and reads these variables in deployment.
+
+The SQL export is intentionally not stored in this repository. Import it into a hosted MySQL-compatible database using that provider's private console. The export includes account names, email addresses, usernames, and password hashes; keep it private. Change seeded account passwords before opening the deployed app to others.
+
+Vercel Functions have an ephemeral, read-only application filesystem. This app currently uses PHP file sessions and writes profile and instructor uploads to local directories, so persistent session and image storage still need to be configured before production use. Do not treat a successful Vercel build as a production-ready deployment until those storage pieces and the external database are connected.
+
 ## Demo accounts
 The five accounts from the original dump have unknown passwords. The added accounts (`admin2`, `admin3`, `registrar2`, `registrar3`, `dean2`, `dean3`, `instructor2`, `instructor3`, `student2`, `student3`) use the password `password`.
 
