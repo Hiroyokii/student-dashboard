@@ -1,0 +1,20 @@
+# Local environment configuration
+.env
+.env.*
+!.env.example
+
+# Uploaded user and instructor images
+/images/users/
+/images/instructors/
+
+# Database exports and local database files
+*.sql
+*.sql.gz
+*.sqlite
+*.db
+
+# Editor and operating-system files
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
