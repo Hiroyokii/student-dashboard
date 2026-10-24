@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/bootstrap.php';
 
 if (!isset($_SESSION['user_id'])) {
     $loginUrl = basename(dirname($_SERVER['SCRIPT_NAME'])) === 'pages' ? '../login.php' : 'login.php';

@@ -12,6 +12,7 @@
 *.sql.gz
 *.sqlite
 *.db
+!/migrations/*.sql
 
 # Editor and operating-system files
 .vscode/

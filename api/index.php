@@ -11,6 +11,7 @@ $routes = [
     '/logout.php' => __DIR__ . '/../logout.php',
     '/dashboard.php' => __DIR__ . '/../dashboard.php',
     '/profile.php' => __DIR__ . '/../profile.php',
+    '/media.php' => __DIR__ . '/../media.php',
     '/pages/course.php' => __DIR__ . '/../pages/course.php',
     '/pages/instructor.php' => __DIR__ . '/../pages/instructor.php',
     '/pages/schoolyear.php' => __DIR__ . '/../pages/schoolyear.php',

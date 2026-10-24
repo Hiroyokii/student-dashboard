@@ -12,20 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'save'
     $last = trim($_POST['lastname'] ?? '');
     $photo = trim($_POST['current_photo'] ?? '');
     if (!empty($_FILES['photo']['name'])) {
-        $mime = (new finfo(FILEINFO_MIME_TYPE))->file($_FILES['photo']['tmp_name']);
-        $extensions = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
-        if (!isset($extensions[$mime]))
-            $error = 'Photo must be a JPG, PNG, or WebP image.';
-        elseif ($_FILES['photo']['error'] !== UPLOAD_ERR_OK)
-            $error = 'Photo upload failed.';
-        else {
-            $dir = __DIR__ . '/../assets/uploads';
-            if (!is_dir($dir))
-                mkdir($dir, 0755, true);
-            $photo = 'assets/uploads/instructor_' . bin2hex(random_bytes(8)) . '.' . $extensions[$mime];
-            if (!move_uploaded_file($_FILES['photo']['tmp_name'], __DIR__ . '/../' . $photo))
-                $error = 'Could not save photo.';
-        }
+        $uploadedPhoto = saveMediaUpload($_FILES['photo'], 'instructor_', ['image/jpeg', 'image/png', 'image/webp']);
+        if ($uploadedPhoto['error'] !== '') $error = 'Photo upload failed.';
+        else $photo = $uploadedPhoto['path'] ?? $photo;
     }
     if (!$error && (!$salutation || !$first || !$last))
         $error = 'Salutation, first name, and last name are required.';
